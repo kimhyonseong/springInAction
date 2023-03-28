@@ -4,10 +4,14 @@ import jakarta.validation.constraints.NotNull;  // javax가 아닌 이유는 관
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class Taco {
+  private Long id;
+  private Date createAt;
+
   @NotNull
   @Size(min = 5, message = "Name must be at least 5 characters long")
   private String name;
