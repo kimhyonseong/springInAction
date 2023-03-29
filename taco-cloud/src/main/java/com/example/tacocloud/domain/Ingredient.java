@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor  //final 또는 @NotNull 변수에 대한 생성자 생성
-//@AllArgsConstructor  //전체를 매개변수로한 생성자 생성 - 동시에 사용하니 에러남
+@AllArgsConstructor  //전체를 매개변수로한 생성자 생성
 public class Ingredient {
-  private final String id;
+  private Long id;
+  private final String code;
   private final String name;
   private final Type type;
 
