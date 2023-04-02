@@ -1,6 +1,7 @@
 package com.example.tacocloud.controller;
 
 import com.example.tacocloud.data.IngredientRepository;
+import com.example.tacocloud.data.TacoRepository;
 import com.example.tacocloud.domain.Ingredient;
 import com.example.tacocloud.domain.Ingredient.Type;
 import com.example.tacocloud.domain.Taco;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +26,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/design")
 public class DesignTacoController {
   private final IngredientRepository ingredientRepository;
+  private TacoRepository tacoRepository;
 
   @Autowired
-  public DesignTacoController(@Qualifier("JdbcIngredientRepository") IngredientRepository ingredientRepository) {
+  public DesignTacoController(@Qualifier("JdbcIngredientRepository") IngredientRepository ingredientRepository,
+                              TacoRepository tacoRepository) {
     this.ingredientRepository = ingredientRepository;
+    this.tacoRepository = tacoRepository;
   }
 
   @GetMapping
@@ -43,6 +47,11 @@ public class DesignTacoController {
     model.addAttribute("taco",new Taco());
 
     return "design";
+  }
+
+  @ModelAttribute(name = "taco")
+  public Taco taco() {
+    return taco();
   }
 
   @PostMapping
