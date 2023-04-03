@@ -4,6 +4,7 @@ import com.example.tacocloud.data.IngredientRepository;
 import com.example.tacocloud.data.TacoRepository;
 import com.example.tacocloud.domain.Ingredient;
 import com.example.tacocloud.domain.Ingredient.Type;
+import com.example.tacocloud.domain.Order;
 import com.example.tacocloud.domain.Taco;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/design")
+@SessionAttributes("order")
 public class DesignTacoController {
   private final IngredientRepository ingredientRepository;
   private TacoRepository tacoRepository;
@@ -49,22 +48,28 @@ public class DesignTacoController {
     return "design";
   }
 
+  @ModelAttribute(name = "order")
+  public Order order() {
+    return new Order();
+  }
+
   @ModelAttribute(name = "taco")
   public Taco taco() {
-    return taco();
+    return new Taco();
   }
 
   @PostMapping
-  public String processDesign(@Valid Taco taco, Errors errors) {
+  public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
     if (errors.hasErrors()) {
-      log.debug(errors.toString());
       log.error(errors.toString());
-      System.out.println(errors.toString());
 
       return "design";
     }
 
-    log.info("processing design: {}",taco);
+    //log.info("processing design: {}",taco);
+    Taco saveTaco = tacoRepository.save(taco);
+    order.addDesign(saveTaco);
+
     return "redirect:/orders/current";
   }
 

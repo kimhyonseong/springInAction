@@ -23,3 +23,7 @@ public class DesignTacoController {
 public class JdbcIngredientRepository implements IngredientRepository{
 }
 ```
+
+2023 04 03  
+- SessionAttributes
+  - 모델 정보를 HTTP 세션에 저장해주는 애노테이션
