@@ -28,7 +28,7 @@ public class DesignTacoController {
   private TacoRepository tacoRepository;
 
   @Autowired
-  public DesignTacoController(@Qualifier("JdbcIngredientRepository") IngredientRepository ingredientRepository,
+  public DesignTacoController(IngredientRepository ingredientRepository,
                               TacoRepository tacoRepository) {
     this.ingredientRepository = ingredientRepository;
     this.tacoRepository = tacoRepository;
@@ -66,7 +66,6 @@ public class DesignTacoController {
       return "design";
     }
 
-    //log.info("processing design: {}",taco);
     Taco saveTaco = tacoRepository.save(taco);
     order.addDesign(saveTaco);
 
