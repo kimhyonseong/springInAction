@@ -6,15 +6,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.ldap.core.support.BaseLdapPathContextSource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.ldap.EmbeddedLdapServerContextSourceFactoryBean;
+import org.springframework.security.config.ldap.LdapBindAuthenticationManagerFactory;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.ldap.userdetails.PersonContextMapper;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -33,11 +39,6 @@ public class SecurityConfig {
             .build();
   }
 
-//  @Bean
-//  public WebSecurityCustomizer webSecurityCustomizer() {
-//    return web -> web.ignoring().requestMatchers("/h2-console/**","/h2-console");
-//  }
-
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -45,12 +46,42 @@ public class SecurityConfig {
             .requestMatchers("/design","/orders").hasRole("USER")
             .requestMatchers("/","/images/**").permitAll()
             .requestMatchers(PathRequest.toH2Console()).permitAll()  // h2 콘솔
-            .requestMatchers("/h2-console/**").permitAll()  // h2 콘솔
             .and()
             .csrf().disable()
             .headers().frameOptions().disable().and()  //iframe 나오게 하기
             .httpBasic();
     return http.build();
+  }
+
+//  @Bean
+//  public EmbeddedLdapServerContextSourceFactoryBean contextSourceFactoryBean() {
+//    EmbeddedLdapServerContextSourceFactoryBean contextSourceFactoryBean =
+//            EmbeddedLdapServerContextSourceFactoryBean.fromEmbeddedLdapServer();
+//    contextSourceFactoryBean.setPort(0);
+//    return contextSourceFactoryBean;
+//  }
+//
+//  @Bean
+//  AuthenticationManager ldapAuthenticationManager(BaseLdapPathContextSource contextSource) {
+//    LdapBindAuthenticationManagerFactory factory = new LdapBindAuthenticationManagerFactory(contextSource);
+//    factory.setUserDnPatterns("uid={0},ou=people");
+//    factory.setUserDetailsContextMapper(new PersonContextMapper());
+//    return factory.createAuthenticationManager();
+//  }
+  @Autowired
+  public void ldapConfigure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.ldapAuthentication()
+            .userSearchBase("ou=people")
+            .userSearchFilter("(uid={0})")
+            .groupSearchBase("ou=groups")
+            .groupSearchFilter("member={0}")
+            .contextSource()
+            .root("dc=tacocloud,dc=com")
+            .ldif("classpath:users.ldif")
+            .and()
+            .passwordCompare()
+            .passwordEncoder(new BCryptPasswordEncoder())
+            .passwordAttribute("userPasscode");
   }
 
   /*

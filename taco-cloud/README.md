@@ -32,3 +32,9 @@ SessionAttributes
 ---
 컨버터 사용 이유 - com.example.tacocloud.web.IngredientByIdConverter
 - id를 이용해 데이터베이스에 저장된 특정 식자재의 데이터를 읽고 Ingredient 객체로 변경하기 위해 사용
+
+2023 04 12
+---
+[https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter](https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter) 참고  
+[https://spring.io/guides/gs/authenticating-ldap/](https://spring.io/guides/gs/authenticating-ldap/) - ldap 참고  
+ldap 오류로 인한 실행 불가
