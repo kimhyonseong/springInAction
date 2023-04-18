@@ -2,10 +2,12 @@ package com.example.tacocloud.controller;
 
 import com.example.tacocloud.data.IngredientRepository;
 import com.example.tacocloud.data.TacoRepository;
+import com.example.tacocloud.data.UserRepository;
 import com.example.tacocloud.domain.Ingredient;
 import com.example.tacocloud.domain.Ingredient.Type;
 import com.example.tacocloud.domain.Order;
 import com.example.tacocloud.domain.Taco;
+import com.example.tacocloud.domain.Users;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,16 +29,19 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
   private final IngredientRepository ingredientRepository;
   private TacoRepository tacoRepository;
+  private UserRepository userRepository;
 
   @Autowired
   public DesignTacoController(IngredientRepository ingredientRepository,
-                              TacoRepository tacoRepository) {
+                              TacoRepository tacoRepository,
+                              UserRepository userRepository) {
     this.ingredientRepository = ingredientRepository;
     this.tacoRepository = tacoRepository;
+    this.userRepository = userRepository;
   }
 
   @GetMapping
-  public String showDesignForm(Model model) {
+  public String showDesignForm(Model model, Principal principal) {
     List<Ingredient> ingredients = new ArrayList<>();
     ingredientRepository.findAll().forEach(ingredients::add);
 
@@ -43,7 +49,10 @@ public class DesignTacoController {
     for (Type type : types) {
       model.addAttribute(type.toString().toLowerCase(),filterByType(ingredients,type));
     }
-    model.addAttribute("taco",new Taco());
+
+    String username = principal.getName();
+    Users users = userRepository.findByUsername(username);
+    model.addAttribute("user",users);
 
     return "design";
   }

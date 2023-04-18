@@ -22,6 +22,9 @@ public class Order implements Serializable {
   private Long id;
   private Date placedAt;
 
+  @ManyToOne
+  private Users users;
+
   @NotBlank(message = "Name is required")
   private String deliveryName;
 
@@ -37,7 +40,7 @@ public class Order implements Serializable {
   @NotBlank(message = "Zip code is required")
   private String deliveryZip;
 
-  @CreditCardNumber(message = "Not a valid credit card number")
+  //@CreditCardNumber(message = "Not a valid credit card number")
   private String ccNumber;
 
   @Pattern(regexp = "^(0[0-9]|1[0-2])/([0-9][0-9])$", message = "Must be formatted MM/YY")
@@ -57,4 +60,6 @@ public class Order implements Serializable {
   void placedAt() {
     this.placedAt = new Date();
   }
+
+
 }
