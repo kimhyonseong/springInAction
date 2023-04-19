@@ -38,3 +38,8 @@ SessionAttributes
 [https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter](https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter) 참고  
 [https://spring.io/guides/gs/authenticating-ldap/](https://spring.io/guides/gs/authenticating-ldap/) - ldap 참고  
 ldap 오류로 인한 실행 불가
+
+2034 04 19
+---
+프로파일 활성화는 다양한 방법으로 가능(확실히 이해하진 못함) - yml / jvm / 환경변수 등  
+ex) export SPRING_PROFILES_ACTIVE=prod
