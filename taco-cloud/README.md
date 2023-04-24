@@ -39,7 +39,13 @@ SessionAttributes
 [https://spring.io/guides/gs/authenticating-ldap/](https://spring.io/guides/gs/authenticating-ldap/) - ldap 참고  
 ldap 오류로 인한 실행 불가
 
-2034 04 19
+2023 04 19
 ---
 프로파일 활성화는 다양한 방법으로 가능(확실히 이해하진 못함) - yml / jvm / 환경변수 등  
 ex) export SPRING_PROFILES_ACTIVE=prod
+
+2023 04 24
+---
+스테레오 타입 애노테이션 : 객체를 선언할 때 그 객체가 어떤 역할을 하는지 나타내는 애노테이션 / 스프링이 자동으로 감지하고 빈으로 등록  
+@PostMapping(consumes="application/json") : Content-type이 application/json과 일치하는 요청만 처리  
+@ResponseStatus(HTTPStatus.CREATED) : 요청이 성공적일 시 201 상태코드 전달
