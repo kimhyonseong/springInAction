@@ -48,4 +48,22 @@ ex) export SPRING_PROFILES_ACTIVE=prod
 ---
 스테레오 타입 애노테이션 : 객체를 선언할 때 그 객체가 어떤 역할을 하는지 나타내는 애노테이션 / 스프링이 자동으로 감지하고 빈으로 등록  
 @PostMapping(consumes="application/json") : Content-type이 application/json과 일치하는 요청만 처리  
-@ResponseStatus(HTTPStatus.CREATED) : 요청이 성공적일 시 201 상태코드 전달
+@ResponseStatus(HTTPStatus.CREATED) : 요청이 성공적일 시 201 상태코드 전달  
+
+2023 04 25
+@RestResource(rel = "관계 이름",path = "경로") : api 경로와 관계 이름 설정 가능, 리소스의 객체에 애노테이션 추가 ex) Taco
+
+이전
+```
+"tacoes" : {
+    "href" : "http://localhost:8080/api/tacoes{?page,size,sort}",
+    "templated" : true
+}
+```
+이후
+```
+"tacos" : {  // 관계
+    "href" : "http://localhost:8080/api/tacos{?page,size,sort}",  // 경로
+    "templated" : true
+}
+```

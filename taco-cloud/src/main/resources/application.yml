@@ -4,7 +4,10 @@ taco:
 logging:
   level:
     tacos: debug
-
+spring:
+  data:
+    rest:
+      base-path: /api
 #---
 #spring:
 #  profiles: prod

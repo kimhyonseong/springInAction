@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface TacoRepository extends CrudRepository<Taco, Long> {
   List<Taco> findAll();
-  Iterable<Taco> findAll(PageRequest pageRequest);
+  List<Taco> findAll(PageRequest pageRequest);
   Optional<Taco> findById(Long id);
 }
