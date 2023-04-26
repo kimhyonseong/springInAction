@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;  // javax가 아닌 이유는 관리하는 회사가 달라졌기 때문
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @RestResource(rel = "tacos", path = "tacos")
+@NoArgsConstructor
 public class Taco {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,5 +31,10 @@ public class Taco {
   @PrePersist
   void createdAt() {
     this.createAt = new Date();
+  }
+
+  public Taco(String name, Date createAt) {
+    this.name = name;
+    this.createAt = createAt;
   }
 }

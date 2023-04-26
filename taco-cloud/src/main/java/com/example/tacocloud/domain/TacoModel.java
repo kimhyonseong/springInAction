@@ -1,6 +1,6 @@
 package com.example.tacocloud.domain;
 
-import lombok.Getter;
+import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -8,17 +8,14 @@ import java.util.Date;
 import java.util.List;
 
 @Relation(value = "taco", collectionRelation = "tacos")
-public class TacoResource extends RepresentationModel<TacoResource> {
-  @Getter
-  private final String name;
+@Getter
+@Setter
+public class TacoModel extends RepresentationModel<TacoModel> {
+  private String name;
+  private Date createdAt;
+  private List<Ingredient> ingredients;
 
-  @Getter
-  private final Date createdAt;
-
-  @Getter
-  private final List<Ingredient> ingredients;
-
-  public TacoResource(Taco taco) {
+  public TacoModel(Taco taco) {
     this.name = taco.getName();
     this.createdAt = taco.getCreateAt();
     this.ingredients = taco.getIngredients();
