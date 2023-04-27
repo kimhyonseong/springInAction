@@ -2,6 +2,7 @@
 - JdbcTemplate와 같은 Template이며 RESTful 호출과 응답에 관련된 메소드를 제공
 - RestTemplate은 RESTful 웹 서비스를 호출하고 결과를 받아오기 위한 클라이언트 측 HTTP 통신 라이브러리
 - 서버와 클라이언트 간의 REST API를 쉽게 호출, 응답 처리
+- 현재는 __WebClient__ 라는 새로운 클라이언트 등장
 
 ---
 ### RestTemplate 이전 통신 방법
