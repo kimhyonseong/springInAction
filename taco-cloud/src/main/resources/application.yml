@@ -8,6 +8,12 @@ spring:
   data:
     rest:
       base-path: /api
+  jms:
+    template:
+      default-destination: tacocloud.order.qeue
+  artemis:
+    password: 1234
+    user: tacoweb
 #---
 #spring:
 #  profiles: prod
