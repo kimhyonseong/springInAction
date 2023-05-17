@@ -4,6 +4,11 @@
       "name": "taco.orders.pageSize",
       "type": "java.lang.String",
       "description": "Description for taco.orders.pageSize."
+    },
+    {
+      "name": "activemq.broker.url",
+      "type": "java.lang.String",
+      "description": "Description for activemq.broker.url."
     }
   ]
 }
