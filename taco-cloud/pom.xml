@@ -141,16 +141,26 @@
             <artifactId>httpclient</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-client-jakarta -->
+        <!-- activemq가 javax 패키지로 되어있는데 jakarta로 수정 -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client-jakarta</artifactId>
+            <version>5.18.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-activemq -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-artemis</artifactId>
-            <version>3.0.4</version>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+            <version>2.7.11</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jms</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.1</version>
         </dependency>
 
     </dependencies>
