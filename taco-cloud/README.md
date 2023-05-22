@@ -72,4 +72,5 @@ ex) export SPRING_PROFILES_ACTIVE=prod
 2023 05 22
 ---
 RabbitMQ  
+프로듀서와 리시버 설정파일이 다름  
 참고 : https://chamggae.tistory.com/164
