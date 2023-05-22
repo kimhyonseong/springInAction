@@ -1,4 +1,4 @@
-package com.example.tacocloud.asyncMessage;
+package com.example.tacocloud.activeMQ;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

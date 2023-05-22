@@ -51,6 +51,7 @@ ex) export SPRING_PROFILES_ACTIVE=prod
 @ResponseStatus(HTTPStatus.CREATED) : 요청이 성공적일 시 201 상태코드 전달  
 
 2023 04 25
+---
 @RestResource(rel = "관계 이름",path = "경로") : api 경로와 관계 이름 설정 가능, 리소스의 객체에 애노테이션 추가 ex) Taco
 
 이전
@@ -67,3 +68,8 @@ ex) export SPRING_PROFILES_ACTIVE=prod
     "templated" : true
 }
 ```
+
+2023 05 22
+---
+RabbitMQ  
+참고 : https://chamggae.tistory.com/164

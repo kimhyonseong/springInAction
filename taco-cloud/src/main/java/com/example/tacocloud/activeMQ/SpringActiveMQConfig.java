@@ -1,4 +1,4 @@
-package com.example.tacocloud.asyncMessage;
+package com.example.tacocloud.activeMQ;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;

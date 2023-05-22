@@ -1,22 +1,22 @@
-package com.example.tacocloud.asyncMessage;
+package com.example.tacocloud.rabbitMQ;
 
 import com.example.tacocloud.domain.TestObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.jms.Destination;
-import org.springframework.jms.core.JmsTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/producer")
+@RequestMapping("/rabbit")
 public class Producer {
-  private final JmsTemplate jmsTemplate;
+  private final RabbitTemplate rabbitTemplate;
   private final Destination queue;
 
-  public Producer(JmsTemplate jmsTemplate, Destination queue) {
-    this.jmsTemplate = jmsTemplate;
+  public Producer(RabbitTemplate rabbitTemplate, Destination queue) {
+    this.rabbitTemplate = rabbitTemplate;
     this.queue = queue;
   }
 
