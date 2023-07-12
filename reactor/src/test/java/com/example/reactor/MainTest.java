@@ -2,6 +2,7 @@ package com.example.reactor;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,8 +19,18 @@ public class MainTest {
 
   @Test
   void createFlux_just() {
-    Flux<String> fruitFlux = Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry");
-    System.out.println(fruitFlux);
+    //Flux<String> fruitFlux = Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry");
+    String[] fruits = new String[]{"Apple", "Orange", "Grape", "Banana", "Strawberry"};
+    Flux<String> fruitFlux = Flux.fromArray(fruits);
+
     fruitFlux.subscribe(f -> System.out.println("Here's some fruit: "+f));
+
+    StepVerifier.create(fruitFlux)
+            .expectNext("Apple")
+            .expectNext("Orange")
+            .expectNext("Grape")
+            .expectNext("Banana")
+            .expectNext("Strawberry")
+            .verifyComplete();
   }
 }
